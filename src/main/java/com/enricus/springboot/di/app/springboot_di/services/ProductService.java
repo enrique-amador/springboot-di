@@ -16,8 +16,11 @@ public class ProductService {
         //multiply by a tax
         return repo.findAll().stream().map(p -> { //map generates new list: inmutability
             Double priceTaxed = p.getPrice() * 1.25d;
-            p.setPrice(priceTaxed.longValue()); //this is using the same object: mutability
-            return p;
+            // p.setPrice(priceTaxed.longValue()); //this is using the same object: mutability
+            //new Product(p.getId(), p.getName(), priceTaxed.longValue());//this fullfills inmutability 
+            Product newProduct = (Product) p.clone();
+            newProduct.setPrice(priceTaxed.longValue());
+            return newProduct;
         }).collect(Collectors.toList());
     }
 
