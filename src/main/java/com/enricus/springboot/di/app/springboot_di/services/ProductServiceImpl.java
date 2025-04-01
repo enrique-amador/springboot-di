@@ -3,14 +3,21 @@
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.enricus.springboot.di.app.springboot_di.models.Product;
 import com.enricus.springboot.di.app.springboot_di.repositories.ProductRepositoryImpl;
 
+@Component
 public class ProductServiceImpl implements ProductService{
 
     //this class acces data via the repository. it may make things to data or use other repos
 
-    private ProductRepositoryImpl repo = new ProductRepositoryImpl(); //this attr is shared by all instances or users, because the controller is a singleton
+    // private ProductRepositoryImpl repo = new ProductRepositoryImpl(); //this attr is shared by all instances or users, because the controller is a singleton
+    
+    @Autowired
+    private ProductRepositoryImpl repo;
 
     @Override
     public List<Product> findAll() {
