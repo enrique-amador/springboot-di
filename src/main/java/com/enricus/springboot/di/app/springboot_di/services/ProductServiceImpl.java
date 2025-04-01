@@ -3,7 +3,6 @@
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enricus.springboot.di.app.springboot_di.models.Product;
@@ -19,12 +18,10 @@ public class ProductServiceImpl implements ProductService{
     // @Autowired
     private ProductRepository repo;
     
-    
     // @Autowired
     // public void setRepo(ProductRepository repo) {
         //     this.repo = repo;
         // }
-        
         
     public ProductServiceImpl(ProductRepository repo) {
         this.repo = repo;
