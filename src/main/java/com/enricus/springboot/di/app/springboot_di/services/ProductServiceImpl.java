@@ -16,9 +16,20 @@ public class ProductServiceImpl implements ProductService{
 
     // private ProductRepositoryImpl repo = new ProductRepositoryImpl(); //this attr is shared by all instances or users, because the controller is a singleton
     
-    @Autowired
+    // @Autowired
     private ProductRepository repo;
-
+    
+    
+    // @Autowired
+    // public void setRepo(ProductRepository repo) {
+        //     this.repo = repo;
+        // }
+        
+        
+    public ProductServiceImpl(ProductRepository repo) {
+        this.repo = repo;
+    } // it's not necessary @autowired
+    
     @Override
     public List<Product> findAll() {
         //multiply by a tax
