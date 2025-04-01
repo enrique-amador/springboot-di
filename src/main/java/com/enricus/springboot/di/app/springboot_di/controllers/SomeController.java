@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.enricus.springboot.di.app.springboot_di.models.Product;
-import com.enricus.springboot.di.app.springboot_di.services.ProductServiceImpl;
+import com.enricus.springboot.di.app.springboot_di.services.ProductService;
 
 @RestController
 @RequestMapping("/api")
@@ -17,7 +17,7 @@ public class SomeController {
 
     // private ProductServiceImpl service = new ProductServiceImpl();
     @Autowired
-    private ProductServiceImpl service;
+    private ProductService service;
 
     @GetMapping
     public List<Product> list() {

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.enricus.springboot.di.app.springboot_di.models.Product;
-import com.enricus.springboot.di.app.springboot_di.repositories.ProductRepositoryImpl;
+import com.enricus.springboot.di.app.springboot_di.repositories.ProductRepository;
 
 @Component
 public class ProductServiceImpl implements ProductService{
@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService{
     // private ProductRepositoryImpl repo = new ProductRepositoryImpl(); //this attr is shared by all instances or users, because the controller is a singleton
     
     @Autowired
-    private ProductRepositoryImpl repo;
+    private ProductRepository repo;
 
     @Override
     public List<Product> findAll() {
