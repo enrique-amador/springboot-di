@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.enricus.springboot.di.app.springboot_di.models.Product;
 
 @Primary
-@Repository
+@Repository("productFoo")
 public class ProductRepositoryFoo implements ProductRepository{
     @Override
     public List<Product> findAll() {
