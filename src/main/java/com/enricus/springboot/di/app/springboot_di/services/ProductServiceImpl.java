@@ -3,6 +3,7 @@
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,8 @@ public class ProductServiceImpl implements ProductService{
 
     // private ProductRepositoryImpl repo = new ProductRepositoryImpl(); //this attr is shared by all instances or users, because the controller is a singleton
     
-    // @Autowired
+    @Autowired
+    @Qualifier("productFoo")
     private ProductRepository repo;
     
     // @Autowired
@@ -24,9 +26,9 @@ public class ProductServiceImpl implements ProductService{
         //     this.repo = repo;
         // }
         
-    public ProductServiceImpl(@Qualifier("productList") ProductRepository repo) {
-        this.repo = repo;
-    } // it's not necessary @autowired
+    // public ProductServiceImpl(@Qualifier("productList") ProductRepository repo) {
+    //     this.repo = repo;
+    // } // in constructors is not necessary @autowired
     
     @Override
     public List<Product> findAll() {
