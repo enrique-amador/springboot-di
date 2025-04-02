@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.enricus.springboot.di.app.springboot_di.models.Product;
 
-@Repository
+@Repository("productList")
 public class ProductRepositoryImpl implements ProductRepository {
 
     //this class access to data
