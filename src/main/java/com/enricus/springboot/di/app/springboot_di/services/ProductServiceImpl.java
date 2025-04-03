@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService{
     // private ProductRepositoryImpl repo = new ProductRepositoryImpl(); //this attr is shared by all instances or users, because the controller is a singleton
     
     @Autowired
-    @Qualifier("productFoo")
+    @Qualifier("productList")
     private ProductRepository repo;
     
     // @Autowired
@@ -36,10 +36,17 @@ public class ProductServiceImpl implements ProductService{
         return repo.findAll().stream().map(p -> { //map generates new list: inmutability
             Double priceTaxed = p.getPrice() * 1.25d;
             // p.setPrice(priceTaxed.longValue()); //this is using the same object: mutability
-            //new Product(p.getId(), p.getName(), priceTaxed.longValue());//this fullfills inmutability 
+            // new Product(p.getId(), p.getName(), priceTaxed.longValue());//this fullfills inmutability 
+            
+            //IMMUTABLE
             Product newProduct = (Product) p.clone();
             newProduct.setPrice(priceTaxed.longValue());
             return newProduct;
+            
+            //MUTABLE
+            // p.setPrice(priceTaxed.longValue());
+            // return p;
+            // //with @RequesScope in ProductRepositoryImpl this is mutable, but with request scope so immutable in practice 
         }).collect(Collectors.toList());
     }
 
