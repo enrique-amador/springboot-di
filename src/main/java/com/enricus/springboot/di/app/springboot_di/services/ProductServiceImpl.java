@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.enricus.springboot.di.app.springboot_di.models.Product;
@@ -26,15 +28,31 @@ public class ProductServiceImpl implements ProductService{
         //     this.repo = repo;
         // }
         
-    // public ProductServiceImpl(@Qualifier("productList") ProductRepository repo) {
-    //     this.repo = repo;
-    // } // in constructors is not necessary @autowired
+        // public ProductServiceImpl(@Qualifier("productList") ProductRepository repo) {
+            //     this.repo = repo;
+            // } // in constructors is not necessary @autowired
+            
+            // @Value("${config.tax}")
+            // private Double tax;
+            
+            // @Value("#{${config.taxmap}.value}")
+            // private Double tax;
+            
+    @Autowired
+    Environment environment;
     
+    // public ProductServiceImpl(Environment environment) {
+    //     this.environment = environment;
+    // }
+
+
     @Override
     public List<Product> findAll() {
         //multiply by a tax
         return repo.findAll().stream().map(p -> { //map generates new list: inmutability
-            Double priceTaxed = p.getPrice() * 1.25d;
+            Double tax = environment.getProperty("config.tax", Double.class);
+            System.out.println(tax);
+            Double priceTaxed = p.getPrice() * tax;
             // p.setPrice(priceTaxed.longValue()); //this is using the same object: mutability
             // new Product(p.getId(), p.getName(), priceTaxed.longValue());//this fullfills inmutability 
             
@@ -49,6 +67,7 @@ public class ProductServiceImpl implements ProductService{
             // //with @RequesScope in ProductRepositoryImpl this is mutable, but with request scope so immutable in practice 
         }).collect(Collectors.toList());
     }
+
 
     @Override
     public Product findById(Long Id) {
