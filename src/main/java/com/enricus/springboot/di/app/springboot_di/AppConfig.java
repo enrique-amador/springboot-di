@@ -2,7 +2,6 @@ package com.enricus.springboot.di.app.springboot_di;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 
@@ -16,9 +15,8 @@ import com.enricus.springboot.di.app.springboot_di.repositories.ProductRepositor
 })
 public class AppConfig {
 
-    @Bean //to create a component when is external (you cannot add @Component to it)
-    @Primary
-    ProductRepository productRepository(){
+    @Bean("productJson") //to create a component when is external (you cannot add @Component to it)
+    ProductRepository productRepositoryJson(){ //inject it in constructors with method‘s name: @Qualifier("productRepositoryJson") 
         return new ProductRepositoryJson();
     }
 }
