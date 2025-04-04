@@ -3,7 +3,6 @@ package com.enricus.springboot.di.app.springboot_di.repositories;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 // import org.springframework.web.context.annotation.RequestScope;
 // import org.springframework.web.context.annotation.SessionScope;
@@ -12,7 +11,6 @@ import com.enricus.springboot.di.app.springboot_di.models.Product;
 
 // @RequestScope //With this is no longer a singleton
 // @SessionScope//http session,``````` used in web apps
-@Primary
 @Repository("productList")
 public class ProductRepositoryImpl implements ProductRepository {
 

@@ -19,9 +19,9 @@ public class ProductServiceImpl implements ProductService{
 
     // private ProductRepositoryImpl repo = new ProductRepositoryImpl(); //this attr is shared by all instances or users, because the controller is a singleton
     
-    @Autowired
-    @Qualifier("productList")
-    private ProductRepository repo;
+    // @Autowired
+    // @Qualifier("productList")
+    // private ProductRepository repo;
     
     // @Autowired
     // public void setRepo(ProductRepository repo) {
@@ -32,25 +32,29 @@ public class ProductServiceImpl implements ProductService{
             //     this.repo = repo;
             // } // in constructors is not necessary @autowired
             
-            // @Value("${config.tax}")
-            // private Double tax;
+    @Value("${config.tax}")
+    private Double tax;
             
             // @Value("#{${config.taxmap}.value}")
             // private Double tax;
             
-    @Autowired
-    Environment environment;
+    // @Autowired
+    // Environment environment;
     
+    private ProductRepository repo;
     // public ProductServiceImpl(Environment environment) {
     //     this.environment = environment;
     // }
+    public ProductServiceImpl(ProductRepository repository) {
+        this.repo = repository;
+    }
 
 
     @Override
     public List<Product> findAll() {
         //multiply by a tax
         return repo.findAll().stream().map(p -> { //map generates new list: inmutability
-            Double tax = environment.getProperty("config.tax", Double.class);
+            // Double tax = environment.getProperty("config.tax", Double.class);
             System.out.println(tax);
             Double priceTaxed = p.getPrice() * tax;
             // p.setPrice(priceTaxed.longValue()); //this is using the same object: mutability
